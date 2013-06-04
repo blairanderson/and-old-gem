@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Tweetgistify::VERSION
   spec.authors       = ["Blair Anderson"]
   spec.email         = ["blair81@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{This is an API wrapper for http://tweetgists.herokuapp.com/. With an API Key from the website, you can easily create posts and fetch your posts.}
+  spec.summary       = %q{create an instance with your API key, then send posts.}
+  spec.homepage      = "http://tweetgists.herokuapp.com/rubygem"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
