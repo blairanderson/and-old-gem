@@ -37,7 +37,7 @@ module Tweetgistify
       response = conn.get do |req| # GET http://sushi.com/search?page=2&limit=100
         req.url '/articles.json', args
         req.headers['Content-Type'] = 'application/json'
-        req.params['limit'] = 100
+        req.params['limit'] = 20
       end
     end
 

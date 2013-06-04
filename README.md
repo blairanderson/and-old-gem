@@ -1,4 +1,4 @@
-# Tweetgistify
+# ShareMore Ruby Library
 
 ## Installation
 
@@ -16,7 +16,27 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Create a new Instance with your api key.
+Create a new Instance with your api key.
+
+    $ client = Tweetgistify::TG.new("YOUR_SHAREMORE_API_KEY_HERE")
+
+Then create a post
+
+    $ client.create(title: "article title", body: "This is for your article body, it can be as long as you want.")
+
+The response includes the URL of the article and the article-id.
+
+
+Next you can get all your articles
+
+
+    $ client.index
+
+
+Or you can request a single article
+
+
+    $ client.article("article_id")
 
 ## Contributing
 
