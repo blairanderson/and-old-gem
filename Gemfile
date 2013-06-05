@@ -5,4 +5,8 @@ gemspec
 
 gem 'cucumber'
 gem 'rspec-expectations'
+gem 'rspec'
 gem 'faraday'
+gem 'guard-rspec'
+gem 'vcr'
+gem 'webmock'

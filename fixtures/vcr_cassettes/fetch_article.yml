@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://share-more.herokuapp.com/api/v1/articles/bj5KdHc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.8.7
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 05 Jun 2013 05:25:45 GMT
+      Etag:
+      - ! '"0a295faecc786ce151b2f590eb83bd8e"'
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.2/2011-07-09)
+      X-Rack-Cache:
+      - miss
+      X-Request-Id:
+      - 5d030580cb753c665c5d5ed155444fc6
+      X-Runtime:
+      - '0.048664'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '169'
+      Connection:
+      - keep-alive
+    body:
+      encoding: US-ASCII
+      string: ! '{"body":"This is a fancy text editor","created_at":"2013-06-04T23:47:26Z","title":"Article
+        Title","article_id":"bj5KdHc","url":"http://share-more.herokuapp.com/bj5KdHc"}'
+    http_version: 
+  recorded_at: Wed, 05 Jun 2013 05:25:32 GMT
+recorded_with: VCR 2.5.0

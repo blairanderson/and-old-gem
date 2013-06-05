@@ -1,49 +1,73 @@
 require "tweetgistify/version"
-require 'rubygems'
 require 'json'
-require 'ostruct'
 require 'faraday'
 
 
 module Tweetgistify
-  class TG
+  class SM
     attr_reader :conn, :key
 
     def initialize(key)
       @key = key
-      @conn = ::Faraday.new(:url => 'http://localhost:3000') do |faraday|
+      @conn = connection
+    end
+
+    def article(article_id)
+      request(:get, get_article_uri(article_id) ) 
+    end
+
+    def articles
+      request(:get, articles_uri, access_token: key)
+    end
+
+    def create(article)
+      response = conn.post do |req|
+        req.url articles_uri, access_token: key
+        req.headers['Content-Type'] = 'application/json'
+        req.body = article.to_json
+      end
+      parse_response(response)
+    end
+
+    def request(verb, url, args = {})
+      response = conn.send(verb) do |req| 
+        req.url url, args
+        req.headers['Content-Type'] = 'application/json'
+      end
+      parse_response(response)
+    end
+
+  private
+
+    def articles_uri
+      "articles"
+    end
+
+    def get_article_uri(article_id)
+      "articles/#{article_id}"
+    end
+
+    def connection
+      conn = ::Faraday.new(:url => root_url) do |faraday|
         faraday.request  :url_encoded
         faraday.response :logger
         faraday.adapter  Faraday.default_adapter
       end
+      conn
     end
 
-    def create(args)#accepts :title and :body
-      message = {"article"=>{
-      "title"=> args[:title], 
-      "revisions_attributes"=>{"0"=>{"body"=> args[:body]}}
-      }, "access_token"=> @key }
-      response = conn.post do |req|
-        req.url '/articles.json'
-        req.headers['Content-Type'] = 'application/json'
-        req.body = message.to_json
-      end
-      puts response.inspect
-      puts response.env[:response_headers][:location]
-    end
-
-
-    def index(args={})
-      response = conn.get do |req| # GET http://sushi.com/search?page=2&limit=100
-        req.url '/articles.json', args
-        req.headers['Content-Type'] = 'application/json'
-        req.params['limit'] = 20
+    def parse_response(response)
+      if response.status == 200
+        JSON.parse(response.body)
+      elsif response.status == 404
+        nil
+      else
+        raise response.body
       end
     end
 
-    def article(article_id)
-      
+    def root_url
+      "http://share-more.herokuapp.com/api/v1/"
     end
-
   end
 end
